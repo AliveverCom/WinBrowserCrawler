@@ -1,6 +1,4 @@
-
-
-**English Translation:**
+**English:**
 
 This is a web crawler and parser running on Windows. Its usage is very simple and intuitive. You don't need to have any knowledge of web crawling or development to use this software. Moreover, it provides an intuitive web parsing tool so that you can easily extract high-value content from web pages and analyze websites.
 
