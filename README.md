@@ -22,7 +22,10 @@ This is a web crawler and parser running on Windows. Its usage is very simple an
 
 4. It offers customizable web parsing algorithms, and you can inherit and override these algorithms through code.
 
+
 =======================================
+
+
 ** Deutsch: **
 
 Dies ist ein Web-Crawler und Parser, der auf Windows läuft. Die Verwendung ist sehr einfach und intuitiv. Sie benötigen keine Kenntnisse über Web-Crawler oder Entwicklung, um diese Software zu nutzen. Außerdem bietet sie benutzerfreundliche Tools zum Analysieren von Webseiten, damit Sie problemlos hochwertige Inhalte extrahieren und Websites segmentieren können.
@@ -45,7 +48,10 @@ Dies ist ein Web-Crawler und Parser, der auf Windows läuft. Die Verwendung ist 
 
 4. Es bietet anpassbare Webseiten-Analysealgorithmen, die Sie durch Code-Erweiterung und Neuladen anpassen können.
 
+
 =======================================
+
+
 ** 中文：**
 这是一个运行在windows上的网页爬取器和解析器。 它的使用非常简单直观。你不需要具有任何网页爬虫和开发知识就可以使用该软件。并且它还提供了直观的网页解析工具，以便你可以轻松地提取网页中的高价值内容，并对网站进行分。
 
