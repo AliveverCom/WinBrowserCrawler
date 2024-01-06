@@ -1,0 +1,12 @@
+C:\Users\User\OneDrive\AliveverGitHub\WinBrowserCrawler\SourceCode\WinBrowserCrawler\bin\Debug\WinBrowserCrawler.exe.config
+C:\Users\User\OneDrive\AliveverGitHub\WinBrowserCrawler\SourceCode\WinBrowserCrawler\bin\Debug\WinBrowserCrawler.exe
+C:\Users\User\OneDrive\AliveverGitHub\WinBrowserCrawler\SourceCode\WinBrowserCrawler\bin\Debug\WinBrowserCrawler.pdb
+C:\Users\User\OneDrive\AliveverGitHub\WinBrowserCrawler\SourceCode\WinBrowserCrawler\obj\Debug\WinBrowserCrawler.csproj.AssemblyReference.cache
+C:\Users\User\OneDrive\AliveverGitHub\WinBrowserCrawler\SourceCode\WinBrowserCrawler\obj\Debug\WinBrowserCrawler.csproj.SuggestedBindingRedirects.cache
+C:\Users\User\OneDrive\AliveverGitHub\WinBrowserCrawler\SourceCode\WinBrowserCrawler\obj\Debug\Alivever.Com.WinBrowserCrawler.MainDlg.resources
+C:\Users\User\OneDrive\AliveverGitHub\WinBrowserCrawler\SourceCode\WinBrowserCrawler\obj\Debug\Alivever.Com.WinBrowserCrawler.Properties.Resources.resources
+C:\Users\User\OneDrive\AliveverGitHub\WinBrowserCrawler\SourceCode\WinBrowserCrawler\obj\Debug\Alivever.Com.WinBrowserCrawler.CUrlListBrowserDlg.resources
+C:\Users\User\OneDrive\AliveverGitHub\WinBrowserCrawler\SourceCode\WinBrowserCrawler\obj\Debug\WinBrowserCrawler.csproj.GenerateResource.cache
+C:\Users\User\OneDrive\AliveverGitHub\WinBrowserCrawler\SourceCode\WinBrowserCrawler\obj\Debug\WinBrowserCrawler.csproj.CoreCompileInputs.cache
+C:\Users\User\OneDrive\AliveverGitHub\WinBrowserCrawler\SourceCode\WinBrowserCrawler\obj\Debug\WinBrowserCrawler.exe
+C:\Users\User\OneDrive\AliveverGitHub\WinBrowserCrawler\SourceCode\WinBrowserCrawler\obj\Debug\WinBrowserCrawler.pdb
