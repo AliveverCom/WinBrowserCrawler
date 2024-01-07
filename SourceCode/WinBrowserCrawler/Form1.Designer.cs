@@ -254,7 +254,7 @@
             // 
             // TableCol_BlackList
             // 
-            this.TableCol_BlackList.Text = "Blacklist";
+            this.TableCol_BlackList.Text = "B/W List";
             this.TableCol_BlackList.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TableCol_BlackList.Width = 69;
             // 
@@ -262,7 +262,7 @@
             // 
             this.TableCol_LoadMs.Text = "Speed";
             this.TableCol_LoadMs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TableCol_LoadMs.Width = 85;
+            this.TableCol_LoadMs.Width = 120;
             // 
             // TableCol_CrrPageUrl
             // 
@@ -375,23 +375,25 @@
             // 
             this.Btn_Cancel.BackColor = System.Drawing.Color.Red;
             this.Btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Cancel.Location = new System.Drawing.Point(134, 94);
+            this.Btn_Cancel.Location = new System.Drawing.Point(239, 92);
             this.Btn_Cancel.Name = "Btn_Cancel";
             this.Btn_Cancel.Size = new System.Drawing.Size(75, 39);
             this.Btn_Cancel.TabIndex = 15;
             this.Btn_Cancel.Text = "Cancel";
             this.Btn_Cancel.UseVisualStyleBackColor = false;
+            this.Btn_Cancel.Visible = false;
             // 
             // Btn_Activate
             // 
             this.Btn_Activate.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Btn_Activate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Activate.Location = new System.Drawing.Point(227, 94);
+            this.Btn_Activate.Location = new System.Drawing.Point(332, 92);
             this.Btn_Activate.Name = "Btn_Activate";
             this.Btn_Activate.Size = new System.Drawing.Size(75, 39);
             this.Btn_Activate.TabIndex = 16;
             this.Btn_Activate.Text = "Activate";
             this.Btn_Activate.UseVisualStyleBackColor = false;
+            this.Btn_Activate.Visible = false;
             this.Btn_Activate.Click += new System.EventHandler(this.Btn_Activate_Click);
             // 
             // Btn_SelectAllInListView
@@ -406,19 +408,21 @@
             // 
             // Btn_OpenProjectLog
             // 
-            this.Btn_OpenProjectLog.Location = new System.Drawing.Point(733, 44);
+            this.Btn_OpenProjectLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_OpenProjectLog.Location = new System.Drawing.Point(701, 44);
             this.Btn_OpenProjectLog.Name = "Btn_OpenProjectLog";
             this.Btn_OpenProjectLog.Size = new System.Drawing.Size(83, 28);
             this.Btn_OpenProjectLog.TabIndex = 18;
-            this.Btn_OpenProjectLog.Text = "See Log";
+            this.Btn_OpenProjectLog.Text = "Log";
             this.Btn_OpenProjectLog.UseVisualStyleBackColor = true;
             this.Btn_OpenProjectLog.Click += new System.EventHandler(this.Btn_OpenProjectLog_Click);
             // 
             // Btn_Edit
             // 
-            this.Btn_Edit.Location = new System.Drawing.Point(321, 99);
+            this.Btn_Edit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Edit.Location = new System.Drawing.Point(138, 94);
             this.Btn_Edit.Name = "Btn_Edit";
-            this.Btn_Edit.Size = new System.Drawing.Size(75, 31);
+            this.Btn_Edit.Size = new System.Drawing.Size(75, 39);
             this.Btn_Edit.TabIndex = 19;
             this.Btn_Edit.Text = "Edit";
             this.Btn_Edit.UseVisualStyleBackColor = true;
