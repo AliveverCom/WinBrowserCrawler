@@ -1,15 +1,23 @@
+![App UI](/SiteTaskList.png)
+
+
+====================================
 **English:**
 
 This is a web crawler and parser running on Windows. Its usage is very simple and intuitive. You don't need to have any knowledge of web crawling or development to use this software. Moreover, it provides an intuitive web parsing tool so that you can easily extract high-value content from web pages and analyze websites.
 
 1. It can support crawling various scales of websites.
+2. 
     a. Default mode (single PC + file storage) can support 100 websites, with 100,000 pages per website.
+   
     b. Single-server mode (database + object storage) can support 10,000 websites, with 2 million pages per website.
+   
     c. Cluster mode (not yet provided), supporting crowdsourcing, can support an unlimited number of websites and pages.
+   
 
-2. It supports multi-language web page crawling and parsing.
+4. It supports multi-language web page crawling and parsing.
 
-3. It incorporates many professional strategies for web crawling.
+5. It incorporates many professional strategies for web crawling.
     a. It can prevent being blacklisted by target websites due to frequent crawling.
     b. It allows setting regular refreshes for key web pages, enabling monitoring of news and shopping websites.
     c. It provides "high-priority rules" to consistently focus on high-value web pages.
@@ -18,7 +26,7 @@ This is a web crawler and parser running on Windows. Its usage is very simple an
     f. It offers anti-malicious refresh rules to minimize waste of your network and computational resources.
     g. It includes content duplication detection to help save storage space wherever possible.
 
-4. It offers customizable web parsing algorithms, and you can inherit and override these algorithms through code.
+6. It offers customizable web parsing algorithms, and you can inherit and override these algorithms through code.
 
 
 =======================================

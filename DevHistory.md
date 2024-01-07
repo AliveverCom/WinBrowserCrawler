@@ -1,10 +1,14 @@
 ﻿==================================
+
+
 2004-01-07
 1. Completed: EnhancedCPageTaskList and CSiteTask.LoadFromFile()。Improved project loading speed by more than 100 times.
 2. Pending Bug：WebBrowser.Title,WebBrowser.DocumentText,they often occur random Exception: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
 
 
 ==================================
+
+
 2024-01-02 and 2024-01-03
 
 1. Debuging.
@@ -13,6 +17,8 @@
 
 
 ==================================
+
+
 2024-01-01
 
 1. Debuging. 
@@ -20,6 +26,8 @@
 
 
 ==================================
+
+
 2023-12-26
 
 1. Completed: Enhanced UI, it can now display a list of all executing Site tasks.
@@ -27,6 +35,8 @@
 
 
 ==================================
+
+
 2023-12-25
 
 1. Completed: Enhanced UrlListBrowserDlg. Enables it to handle various web page errors.
@@ -43,6 +53,8 @@
 
 
 ==================================
+
+
 2023-12-24
 
 1. Plan: Add function: Save SiteTask to file, in the site task folder.
@@ -50,6 +62,8 @@
 
 
 ==================================
+
+
 2023-12-23
 1. Completed: I enhanced the CUrlListBrowserDlg class so that it can prevent WebBrowser from loading images in web pages.
 2. Completed: I enhanced the CPageTask class so that it can parse the basic information of the web page from the HtmlDocument.
@@ -65,6 +79,8 @@
 
 
 ==================================
+
+
 2023-12-22
 1. Completed: I created the CLogFile. And change all Excetpions to non-blocking logging.
 2. Completed: I created CSiteTaskMgr to manage concurrent crawling of multiple websites.
@@ -76,6 +92,8 @@
 
 
 ==================================
+
+
 2023-12-17
 1. Completed: The browser crawler project was created.
 2. Completed: Created CUrlListBrowserDlg to implement the most basic WebBrowser function of downloading the specified URL.
