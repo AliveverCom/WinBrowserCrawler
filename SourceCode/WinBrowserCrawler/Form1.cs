@@ -833,7 +833,7 @@ namespace Alivever.Com.WinBrowserCrawler
             string newFolder = folderDlg.SelectedPath;
 
             CSiteTaskMgr stm = null;
-            stm = CSiteTaskMgr.LoadFromFolder(newFolder);
+            stm = CSiteTaskMgr.LoadFromFolder(newFolder,true, false);
 
             return stm;
         }//LoadProject()

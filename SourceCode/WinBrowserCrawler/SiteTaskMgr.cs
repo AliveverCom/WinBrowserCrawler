@@ -86,7 +86,10 @@ namespace Alivever.Com.WinBrowserCrawler
         /// </summary>
         /// <param name="projectDir"></param>
         /// <exception cref="Exception"></exception>
-        public static CSiteTaskMgr LoadFromFolder(string projectDir)
+        public static CSiteTaskMgr LoadFromFolder(
+            string projectDir, 
+            bool bIncludePageTasks,
+            bool reCheckSiteRule)
         {
             if (!Directory.Exists(projectDir))
                 throw new Exception("directory not found : "+ projectDir);
@@ -110,7 +113,7 @@ namespace Alivever.Com.WinBrowserCrawler
 
             foreach (string crrDir in subFolder)
             {
-                CSiteTask st = CSiteTask.LoadFromFile_Json_TaskFolder( crrDir, true);
+                CSiteTask st = CSiteTask.LoadFromFile_Json_TaskFolder( crrDir, bIncludePageTasks, reCheckSiteRule);
                 //st.SetCrrRunStorageRoot(crrDir);
 
                 if (st == null)

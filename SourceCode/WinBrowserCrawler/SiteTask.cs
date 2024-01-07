@@ -514,13 +514,13 @@ namespace Alivever.Com.WinBrowserCrawler
         /// </summary>
         /// <param name="urls"></param>
         /// <returns></returns>
-        public int AddNewPageTasks(string baseUrl, List<string> urls)
+        public int AddNewPageTasks(string baseUrl, IEnumerable<string> urls)
         {
             int i = 0;
             //string fixSharp = this.SiteUrlPrefix + "#";
             foreach (var crrUrl in urls)
             {
-                i += this.AddNewPageTasks(baseUrl ,crrUrl) ? 1 : 0;
+                i += this.AddNewPageTasks(baseUrl ,crrUrl) != null ? 1 : 0;
                 
             }
 
@@ -556,7 +556,7 @@ namespace Alivever.Com.WinBrowserCrawler
 
             //if(this.Tasks_Active.Contains(crrUrl))
 
-            this.Tasks_Active.Add(pt);
+            this.Tasks_Active.Add(pt,false);
 
             return true;
         }
@@ -568,7 +568,7 @@ namespace Alivever.Com.WinBrowserCrawler
         /// </summary>
         /// <param name="urls"></param>
         /// <returns></returns>
-        public bool AddNewPageTasks(string baseUrl, string crrUrl)
+        public CPageTask AddNewPageTasks(string baseUrl, string crrUrl)
         {
             string originalUrl = crrUrl;
 
@@ -580,14 +580,14 @@ namespace Alivever.Com.WinBrowserCrawler
 
             crrUrl = crrUrl.Trim();
             if (string.IsNullOrEmpty(crrUrl))
-                return false;
+                return null;
 
             crrUrl = GetAbsoluteUrl(baseUrl, crrUrl);
 
             if (crrUrl == null)
             {
                 this.LogFile.AppendMessage("AddNewPageTasks ignored 1: " + originalUrl);
-                return false;
+                return null;
             }
             // skip if url is not belong to current site, or url is only a page mark as #
             if (  ( IsExtend2SaveMainDomain && !this.IsBelongToThisHost(crrUrl) )
@@ -596,7 +596,7 @@ namespace Alivever.Com.WinBrowserCrawler
             {
                 string str = "AddNewPageTasks url is not in site. url= " + crrUrl + "; siteUrl= " + this.SiteRootUrl;
                 this.LogFile.AppendError(str);
-                return false;
+                return null;
 
             }
 
@@ -604,12 +604,12 @@ namespace Alivever.Com.WinBrowserCrawler
             if (endStr != null)
             {
                 this.LogFile.AppendWarning($"AddNewPageTasks Skip URL end with '{endStr}'; URL= {crrUrl}");
-                return false;
+                return null;
             }
 
             // skip if url is already in the task list.
             if (this.IsPageUrlExist(crrUrl))
-                return false;
+                return null;
 
             CPageTask pt = new CPageTask() { TaskId = this.GetNewPageTaskId() };
 
@@ -634,7 +634,7 @@ namespace Alivever.Com.WinBrowserCrawler
                     this.Tasks_Pending.Add(pt);
             }
 
-            return true;
+            return pt;
         }//AddNewPageTasks(string crrUrl)
 
         public CPageParser_Base GetPageParser()
@@ -936,7 +936,10 @@ namespace Alivever.Com.WinBrowserCrawler
         /// load a site task from task folder. this function will use default task file name to get json file.
         /// and also load all task lists from files.
         /// </summary>
-        public static CSiteTask LoadFromFile_Json_TaskFolder( string _taskFolder,bool bIncludePageTasks)
+        public static CSiteTask LoadFromFile_Json_TaskFolder( 
+            string _taskFolder,
+            bool bIncludePageTasks, 
+            bool reCheckSiteRule)
         {
             //load site task obj form last version file.
             string lastFile = GHelper.GetLastVersionFile(_taskFolder, CSiteTask.FileName_SiteTask.Replace("{0}", "*"));
@@ -956,9 +959,11 @@ namespace Alivever.Com.WinBrowserCrawler
 
             LoadFolder_HistoryTasks(_taskFolder, rstSiteTask);
 
-            LoadFolder_ActiveTasks(_taskFolder, rstSiteTask);
-
             LoadFolder_PendingTasks(_taskFolder, rstSiteTask);
+
+            LoadFolder_ActiveTasks(_taskFolder, rstSiteTask,  reCheckSiteRule);
+
+            rstSiteTask.CurrentRunTime = DateTime.Now;
 
             rstSiteTask.ReActive_PeriodicallyPages();
 
@@ -987,10 +992,14 @@ namespace Alivever.Com.WinBrowserCrawler
             if (string.IsNullOrEmpty(Last_PendingFile))
                 throw new Exception("Can't find Tasks_Pending file: " + _taskFolder);
 
-            rstSiteTask.Tasks_Pending.LoadFromFile(Last_PendingFile, true, rstSiteTask.Tasks_Pending, true);
+            rstSiteTask.Tasks_Pending.LoadFromFile(Last_PendingFile, false, rstSiteTask.Tasks_Pending, true);
 
-            //2. remove tasks if they are already in history tasks.
-            rstSiteTask.Tasks_Pending.RemoveRange(a => rstSiteTask.Tasks_History.Contains(a.Url));
+            ////// 2. remove tasks if they are already in history tasks.
+            //rstSiteTask.Tasks_Pending.RemoveRange(a => rstSiteTask.Tasks_History.Contains(a.Url));
+            IEnumerable<string> delTasks = from a in rstSiteTask.Tasks_Pending.GetReadonlyList()
+                                           where rstSiteTask.Tasks_History.Contains(a.Url)
+                                           select a.Url;
+            rstSiteTask.Tasks_Pending.RemoveRange(delTasks);
 
         }
 
@@ -1002,7 +1011,7 @@ namespace Alivever.Com.WinBrowserCrawler
         /// <param name="_taskFolder"></param>
         /// <param name="rstSiteTask"></param>
         /// <exception cref="Exception"></exception>
-        private static void LoadFolder_ActiveTasks(string _taskFolder, CSiteTask rstSiteTask)
+        private static void LoadFolder_ActiveTasks(string _taskFolder, CSiteTask rstSiteTask, bool reCheckSiteRule)
         {
             //1. find last version of task file.
             string last_ActiveFile = GHelper.GetLastVersionFile(_taskFolder,
@@ -1012,8 +1021,37 @@ namespace Alivever.Com.WinBrowserCrawler
                 throw new Exception("Can't find Tasks_Active file: " + _taskFolder);
 
             //load Active task lists from files.
-            rstSiteTask.Tasks_Active.LoadFromFile(last_ActiveFile, true, rstSiteTask.Tasks_Active, true);
+            if (!reCheckSiteRule)
+            {
+                rstSiteTask.Tasks_Active.LoadFromFile(last_ActiveFile, false, rstSiteTask.Tasks_Active, true);
+                //2. remove tasks if they are already in history tasks.
 
+                IEnumerable<string> delTasks = from a in rstSiteTask.Tasks_Active.GetReadonlyList()
+                                               where rstSiteTask.Tasks_History.Contains(a.Url)
+                                               select a.Url;
+                //foreach (var crrTask in rstSiteTask.Tasks_Active)
+                //{
+                //    //rstSiteTask.Tasks_Active.RemoveRange(a => rstSiteTask.Tasks_History.Contains(a.Url));
+                //    if (rstSiteTask.Tasks_History.Contains(crrTask.Url))
+                //}
+                rstSiteTask.Tasks_Active.RemoveRange(delTasks);
+            }
+            else
+            {
+                CPageTaskList ptl = new CPageTaskList();
+                ptl.LoadFromFile(last_ActiveFile, true, rstSiteTask.Tasks_Active, true);
+
+                foreach (CPageTask crrPt in ptl.GetReadonlyList())
+                {
+                    CPageTask pt  = rstSiteTask.AddNewPageTasks(null, crrPt.Url);
+
+                    if( pt != null)
+                        pt.TaskTime = crrPt.TaskTime;
+                }
+
+                //rstSiteTask.Tasks_Active.AddRange(ptl.GetReadonlyList());
+                ptl.Clear();
+            }
             //2. remove tasks if they are already in history tasks.
             //List<CPageTask> rmList = new List<CPageTask>();
             //foreach(CPageTask crrActive in rstSiteTask.Tasks_Active.GetReadonlyList())
@@ -1022,8 +1060,6 @@ namespace Alivever.Com.WinBrowserCrawler
             //        rmList.Add(crrActive);
             //}
 
-            //2. remove tasks if they are already in history tasks.
-            rstSiteTask.Tasks_Active.RemoveRange( a => rstSiteTask.Tasks_History.Contains(a.Url));
 
         }//LoadFolder_ActiveTasks()
 
