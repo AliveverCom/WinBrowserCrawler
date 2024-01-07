@@ -1,4 +1,6 @@
 ﻿==================================
+
+
 2004-01-07
 1. Completed: EnhancedCPageTaskList and CSiteTask.LoadFromFile()。Improved project loading speed by more than 100 times.
 2. Pending Bug：WebBrowser.Title,WebBrowser.DocumentText,they often occur random Exception: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
