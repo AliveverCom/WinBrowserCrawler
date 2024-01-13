@@ -258,7 +258,7 @@ namespace Alivever.Com.WinBrowserCrawler
         {
             InitializeComponent();
 
-            RefreshCurrentProject2FormTimer.Interval = 15 * 1000;
+            RefreshCurrentProject2FormTimer.Interval = 30 * 1000;
             RefreshCurrentProject2FormTimer.Tick += RefreshCurrentProject2FormTimer_Tick;
 
             LstView_SiteTasks.GridLines = true;
@@ -282,8 +282,8 @@ namespace Alivever.Com.WinBrowserCrawler
                 foreach (CSiteTask crrSite in
                     CSiteTaskMgr.Ins.GetSiteTasks().OrderBy(a => a.Exe).ThenBy(a => a.SiteRootUrl))
                 {
-                    lock (crrSite)
-                    {
+                    //lock (crrSite)
+                    //{
                         ///// get or create current row from/in List View
                         ListViewItem crrRow;
                         if (this.LstView_SiteTasks.Items.Count > i)
@@ -328,10 +328,10 @@ namespace Alivever.Com.WinBrowserCrawler
                                 $"{crrSite.Cfg_PageTaskInterval_s}s" ;
 
                             // current page url
-                            crrRow.SubItems[8].Text = new Uri(crrPage.Url).PathAndQuery.ToString();
+                            crrRow.SubItems[8].Text =  new Uri(crrPage.Url).PathAndQuery.ToString();
                         }
                         i++;
-                    }//lock (crrSite)
+                    //}//lock (crrSite)
                 }//foreach( CSiteTask crrSite in 
 
                 RefreshSystemUsageLabel();
@@ -365,7 +365,9 @@ namespace Alivever.Com.WinBrowserCrawler
             Process currentProcess = Process.GetCurrentProcess();
             double memoryUsed = currentProcess.WorkingSet64 / (double)(1024*1024*1024); //GB
 
-            this.Lab_SystemUsage.Text = $"CPU: {cpuUsage.ToString("0")}% | Mem: {memoryUsed.ToString("0.00")}GB";
+            this.Lab_SystemUsage.Text = $"CPU: {cpuUsage.ToString("0")}% | "
+                + $"Mem: {memoryUsed.ToString("0.00")}GB | "
+                + $"{DateTime.Now.ToString("MMM-dd HH:mm:ss ")}";
             CSiteTaskMgr.Ins.GetLogFile().AppendMessage(this.Lab_SystemUsage.Text);
         }
 

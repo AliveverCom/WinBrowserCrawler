@@ -299,34 +299,34 @@
             this.MenuItem_MergeProject,
             this.MenuItem_CloseProject});
             this.Menu_File.Name = "Menu_File";
-            this.Menu_File.Size = new System.Drawing.Size(73, 20);
-            this.Menu_File.Text = "Menu_File";
+            this.Menu_File.Size = new System.Drawing.Size(37, 20);
+            this.Menu_File.Text = "File";
             // 
             // MenuItem_NewProject
             // 
             this.MenuItem_NewProject.Name = "MenuItem_NewProject";
-            this.MenuItem_NewProject.Size = new System.Drawing.Size(148, 22);
+            this.MenuItem_NewProject.Size = new System.Drawing.Size(180, 22);
             this.MenuItem_NewProject.Text = "New Project";
             this.MenuItem_NewProject.Click += new System.EventHandler(this.MenuItem_NewProject_Click);
             // 
             // MenuItem_LoadProject
             // 
             this.MenuItem_LoadProject.Name = "MenuItem_LoadProject";
-            this.MenuItem_LoadProject.Size = new System.Drawing.Size(148, 22);
+            this.MenuItem_LoadProject.Size = new System.Drawing.Size(180, 22);
             this.MenuItem_LoadProject.Text = "Load Project";
             this.MenuItem_LoadProject.Click += new System.EventHandler(this.MenuItem_LoadProject_Click);
             // 
             // MenuItem_MergeProject
             // 
             this.MenuItem_MergeProject.Name = "MenuItem_MergeProject";
-            this.MenuItem_MergeProject.Size = new System.Drawing.Size(148, 22);
+            this.MenuItem_MergeProject.Size = new System.Drawing.Size(180, 22);
             this.MenuItem_MergeProject.Text = "Merge Project";
             this.MenuItem_MergeProject.Click += new System.EventHandler(this.MenuItem_MergeProject_Click);
             // 
             // MenuItem_CloseProject
             // 
             this.MenuItem_CloseProject.Name = "MenuItem_CloseProject";
-            this.MenuItem_CloseProject.Size = new System.Drawing.Size(148, 22);
+            this.MenuItem_CloseProject.Size = new System.Drawing.Size(180, 22);
             this.MenuItem_CloseProject.Text = "Close Project";
             this.MenuItem_CloseProject.Click += new System.EventHandler(this.MenuItem_CloseProject_Click);
             // 

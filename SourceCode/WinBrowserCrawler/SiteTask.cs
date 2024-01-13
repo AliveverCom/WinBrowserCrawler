@@ -72,7 +72,7 @@ namespace Alivever.Com.WinBrowserCrawler
         /// <summary>
         /// if page loding time over this value, the browser will think timeout and failed.
         /// </summary>
-        public int Cfg_MaxPageLoadTimeout_s = 30;
+        public int Cfg_MaxPageLoadTimeout_s = 120;
 
         [Browsable(false)]
         public const int Cfg_Min_SiteRootReloadInterval_s = 600;

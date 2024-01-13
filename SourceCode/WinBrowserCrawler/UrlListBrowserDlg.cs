@@ -260,8 +260,10 @@ namespace Alivever.Com.WinBrowserCrawler
                     return;
                 }
 
-                if (this.webBrowser1.Document.Url?.ToString() != this.LastNavigateUrl
-                    && this.webBrowser1.Document.Url?.ToString() == this.LastNavigateUrl+'/')
+                string docUrl;
+                    docUrl = this.webBrowser1.Document.Url.ToString();
+
+                if (docUrl != null &&!docUrl.StartsWith( this.LastNavigateUrl))
                 {
                     this.SiteTask.GetLogFile().AppendWarning(
                         $"PageTask redirected but still can be processed. " +
@@ -350,7 +352,6 @@ namespace Alivever.Com.WinBrowserCrawler
         }
         private void PageLoadTimer_Tick(object sender, EventArgs e)
         {
-                this.webBrowser1.Stop();
                 //DisableAutoPlayVideos();
             this.SetFormTitle("PageLoadTimer_Tick(); ");
 
@@ -363,33 +364,36 @@ namespace Alivever.Com.WinBrowserCrawler
             if (IsPageLoaded)
                 return;
 
+            this.webBrowser1.Stop();
             this.RunNextTasksTimer.Stop();
             PageLoadTimer.Stop();
-
-            try
-            {
-
-                // chek if url load error
-                if (this.IsCurrentBrowserDocError())
-                    return;
-
-                if (this.SiteTask.Cfg_IsDisableLoadImages)
-                    DisableImages(webBrowser1.ActiveXInstance);
+            ForceSkipCurrentPageTask(true, true);
 
 
-                /// Page hasn't finished loading within the specified time
-                /// Treat the current loading content as loaded
-                ProcessLoadedPage();
-                ResetRunNextTasksTimer();
-            }
-            catch (Exception ex)
-            {
-                // Get stack trace information
-                LogUnexpectedError(ex);
+            //try
+            //{
 
-                ForceSkipCurrentPageTask(true,false);
+            //    // chek if url load error
+            //    if (this.IsCurrentBrowserDocError())
+            //        return;
 
-            }
+            //    if (this.SiteTask.Cfg_IsDisableLoadImages)
+            //        DisableImages(webBrowser1.ActiveXInstance);
+
+
+            //    /// Page hasn't finished loading within the specified time
+            //    /// Treat the current loading content as loaded
+            //    ProcessLoadedPage();
+            //    ResetRunNextTasksTimer();
+            //}
+            //catch (Exception ex)
+            //{
+            //    // Get stack trace information
+            //    LogUnexpectedError(ex);
+
+            //    ForceSkipCurrentPageTask(true,false);
+
+            //}
 
 
         }//PageLoadTimer_Tick(object sender, EventArgs e)
@@ -444,20 +448,20 @@ namespace Alivever.Com.WinBrowserCrawler
                 //}
 
 
-                if (this.webBrowser1.Document == null || this.webBrowser1.Document.Body == null)
-                {
-                    this.SiteTask.GetLogFile().AppendError(
-                        $"Document.Body==null ;" +
-                        $"Navigate= {this.LastNavigateUrl} ; " +
-                        $"IsPageLoaded= {IsPageLoaded} ; ProcessPage= {nProcessPage}; NavigatePage= {this.nNavigatePage}");
+                //if (this.webBrowser1.Document == null || this.webBrowser1.Document.Body == null)
+                //{
+                //    this.SiteTask.GetLogFile().AppendError(
+                //        $"Document.Body==null ;" +
+                //        $"Navigate= {this.LastNavigateUrl} ; " +
+                //        $"IsPageLoaded= {IsPageLoaded} ; ProcessPage= {nProcessPage}; NavigatePage= {this.nNavigatePage}");
 
-                    this.SiteTask.AddErrorUrl(this.CrrPageTask.Url);
+                //    this.SiteTask.AddErrorUrl(this.CrrPageTask.Url);
 
-                    this.CrrPageTask.Exe = EExecuteStatus.Error;
-                    this.SiteTask.FinishActivePageTask(this.CrrPageTask);
-                    nProcessPage++;
-                    return true;
-                }
+                //    this.CrrPageTask.Exe = EExecuteStatus.Error;
+                //    this.SiteTask.FinishActivePageTask(this.CrrPageTask);
+                //    nProcessPage++;
+                //    return true;
+                //}
             }//lock (webBrowser1.Document)
 
             return false;
@@ -558,7 +562,7 @@ namespace Alivever.Com.WinBrowserCrawler
             }
             else
             {
-                string pageHtml;
+                string pageHtml=null;
                 lock(webBrowser1)
                 {
                     pageHtml = webBrowser1.DocumentText;
