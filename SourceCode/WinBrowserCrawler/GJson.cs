@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using System.Xml.Schema;
 
 namespace Alivever.Com.WinBrowserCrawler
 {
@@ -58,18 +59,26 @@ namespace Alivever.Com.WinBrowserCrawler
 
             List<T> rstList = new List<T>();
 
-            using (StreamReader sr = new StreamReader(_fullFilePath))
-            {
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    if (line.Length < 2)
-                        continue;
+            string[] lines = File.ReadAllLines(_fullFilePath);
 
-                    T crrObj = FromJson<T>(line);
+            //using (StreamReader sr = new StreamReader(_fullFilePath))
+            //{
+            //    string line;
+            //    while ((line = sr.ReadLine()) != null)
+            //    {
+            //foreach(string line in lines) 
+            Parallel.ForEach(lines, new ParallelOptions {  MaxDegreeOfParallelism = 4 }, line=>
+            { 
+                if (line.Length < 2)
+                        return;
+
+                T crrObj = FromJson<T>(line);
+
+                lock(rstList)
                     rstList.Add(crrObj);
-                }
-            }
+               
+            });
+
             return rstList;
 
         }//LoadFromFile
